@@ -31,7 +31,7 @@ class AdminController implements IController {
 	}
 	public function listAction(){
 		$fc = FrontController::getInstance();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		$model = new LoadModel();
 		$select = new AdminSelectModel();
 		$model->data = $select->select_list_user();
@@ -89,8 +89,8 @@ class AdminController implements IController {
 		$fc->setBody($output);
 	}
 	public function addcategoryAction(){
-		$pars = new MickModel();
-		$category = $pars->valid_string($_POST["category"]);
+		$pars = new VerificationModel();
+		$category = $pars->verifacationLogin($_POST["category"]);
 		$model = new LoadModel();
 		if($category == '0'){
 			$model->error[] = "Нет данных";
@@ -115,8 +115,8 @@ class AdminController implements IController {
 		header('Location: '.DEFAULT_DIR.'/admin/category');
 	}
 	public function addoptionsAction(){
-		$pars = new MickModel();
-		$options = $pars->valid_string($_POST["options"]);
+		$pars = new VerificationModel();
+		$options = $pars->verifacationLogin($_POST["options"]);
 		$model = new LoadModel();
 		if($options == '0'){
 			$model->error[] = "Нет данных";
@@ -176,8 +176,8 @@ class AdminController implements IController {
 			$fc->setBody($output);
 	}
 	public function addmetroAction(){
-			$pars = new MickModel();
-			$metro = $pars->valid_string($_POST["metro"]);
+			$pars = new VerificationModel();
+			$metro = $pars->verifacationLogin($_POST["metro"]);
 			// var_dump($metro);exit;
 			$model = new LoadModel();
 			if($metro == '0'){
@@ -204,9 +204,9 @@ class AdminController implements IController {
 			$fc->setBody($output);
 	}
 	public function addstreetAction(){
-			$pars = new MickModel();
-			$metro = $pars->valid_string($_POST["metro"]);
-			$street = $pars->valid_string($_POST["street"]);
+			$pars = new VerificationModel();
+			$metro = $pars->verifacationLogin($_POST["metro"]);
+			$street = $pars->verifacationLogin($_POST["street"]);
 			var_dump($_POST);exit;
 			$model = new LoadModel();
 			if($street == '0'){
@@ -235,8 +235,8 @@ class AdminController implements IController {
 	public function editmetroAction(){
 		$fc = FrontController::getInstance();
 		$param = $fc->getParams();
-		$pars = new MickModel();
-		$id = $pars->valid_int($param['name']);
+		$pars = new VerificationModel();
+		$id = $pars->verifacationLogin($param['name']);
 		$model = new LoadModel();
 		if(($id == false)||($id == "Недопустимые символы")){
 			$model->error[]='Недопустимые символы';
@@ -259,9 +259,9 @@ class AdminController implements IController {
 	public function addeditmetroAction(){
 		$fc = FrontController::getInstance();
 		$param = $fc->getParams();
-		$pars = new MickModel();
-		$id = $pars->valid_int($param['name']);
-		$metro = $pars->valid_string($_POST['metro']);
+		$pars = new VerificationModel();
+		$id = $pars->verifacationInt($param['name']);
+		$metro = $pars->verifacationLogin($_POST['metro']);
 		$model = new LoadModel();
 		if(($id == false)||($id == "Недопустимые символы")){
 			$model->error[]='Недопустимые символы';
@@ -292,8 +292,8 @@ class AdminController implements IController {
 		$model = new LoadModel();
 		$fc = FrontController::getInstance();
 		$param=$fc->getParams();
-		$pars = new MickModel();
-		$id = $pars->valid_int($param['name']);
+		$pars = new VerificationModel();
+		$id = $pars->verifacationInt($param['name']);
 		$model->url = 'category';
 		$select = new AdminSelectModel();
 		$model->data = $select->add_select_category($id);
@@ -314,9 +314,9 @@ class AdminController implements IController {
 		$model = new LoadModel();
 		$fc = FrontController::getInstance();
 		$param=$fc->getParams();
-		$pars = new MickModel();
-		$categ = $pars->valid_string($_POST['metro']);
-		$id = $pars->valid_int($param['name']);
+		$pars = new VerificationModel();
+		$categ = $pars->verifacationLogin($_POST['metro']);
+		$id = $pars->verifacationInt($param['name']);
 		if($categ == false){
 			$model->error[]="Ошибка: не удалось редактировать";
 		}

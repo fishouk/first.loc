@@ -25,7 +25,7 @@ class IndexController implements IController {
 			exit();
 		}
 		$model = new LoadModel();
-		$utils = new MickModel();
+		$utils = new VerificationModel();
 		$fc = FrontController::getInstance();
 		if(empty($_POST["login"])){
 			$model->error[] .= "Введите логин.";

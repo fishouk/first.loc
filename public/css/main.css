@@ -19,10 +19,11 @@ h3{
 	font-size: 1.25rem;
 }
 
-/*************** MAIN STYLES ***************/
+/*************** ChangeLog STYLES ***************/
 
 .container{
 	width: 85%;
+	height: 100%;
 	padding: 0 20px;
 	margin: 0 auto;
 	background-color: #fff;
@@ -30,6 +31,7 @@ h3{
 	.container h1{
 		padding: 20px 0;
 		border-bottom: 1px dotted #333;
+	
 	}
 
 		.mainEditsBlock{
@@ -58,3 +60,41 @@ h3{
 					.editsList a:hover{
 						color: tomato;
 					}
+
+/*************** MAIN STYLES ***************/
+	header{
+		padding:15px 0;
+		background-color: #fff;
+	}
+		nav a:link,
+		nav a:active{
+			margin-left: 15px;
+			display: inline-block;
+			text-decoration: none;
+			color: #369;	 
+		}
+		nav a:visited{
+			color: #ccc;
+		}
+		nav a:hover{
+			color: tomato;
+		}
+		form{
+			height: 50%;
+			margin: 0 auto;
+			padding: 40px;
+		}
+			input label{
+				display: block;
+				margin-top:10px;
+			}
+			input:last-child{
+				margin-top:10px;
+			}
+
+
+	footer{
+		height: 25px;
+		padding: 20px;
+		font-size: .7rem;		
+	}

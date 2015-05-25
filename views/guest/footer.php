@@ -1,7 +1,8 @@
-<div class="footer">
-	<div class="wrap">
-		copyright &copy; 2015
-	</div>
-</div>
+ <footer>
+      <div class="wrap">
+        copyright &copy; 2015
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

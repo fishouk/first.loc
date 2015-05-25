@@ -38,12 +38,12 @@ class UserController implements IController {
 	}
 	
 	public function edit_validateAction(){
-		$pars = new MickModel();
-		$phone_1 = $pars->valid_phone_edit($_POST["phone_1"]);
-		$phone_2 = $pars->valid_phone_edit($_POST["phone_2"]);
-		$phone_3 = $pars->valid_phone_edit($_POST["phone_3"]);
-		$email   = $pars->valid_email($_POST["email"]);
-		$skype   = $pars->valid_string($_POST["skype"]);
+		$pars = new VerificationModel();
+		$phone_1 = $pars->verifacationPhone($_POST["phone_1"]);
+		$phone_2 = $pars->verifacationPhone($_POST["phone_2"]);
+		$phone_3 = $pars->verifacationPhone($_POST["phone_3"]);
+		$email   = $pars->verifacationEmail($_POST["email"]);
+		$skype   = $pars->verifacationString($_POST["skype"]);
 		$model = new LoadModel();
 		if(($phone_1 == "Не соответствует номеру телефона") || ($phone_1 == "Лишние символы в номере телефона")){$model->error[] = $phone_1;}
 		if(($phone_2 == "Не соответствует номеру телефона") || ($phone_2 == "Лишние символы в номере телефона")){$model->error[] = $phone_2;}
@@ -91,10 +91,10 @@ class UserController implements IController {
 		$fc = FrontController::getInstance();
 		$model = new LoadModel();
 		$select = new SelectModel();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		$get=$fc->getParams();
 		if(isset($get['name']) && !empty($get['name'])){
-			$int=$pars->valid_int($get['name']);
+			$int=$pars->verifacationInt($get['name']);
 		}
 		if(($int==false)||($int=="Недопустимые символы")){
 			$model->error[]='Ошибка URL адресса';
@@ -118,10 +118,10 @@ class UserController implements IController {
 		$fc = FrontController::getInstance();
 		$model = new LoadModel();
 		$select = new SelectModel();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		$get=$fc->getParams();
 		if(isset($get['name']) && !empty($get['name'])){
-			$int=$pars->valid_int($get['name']);
+			$int=$pars->verifacationInt($get['name']);
 		}
 		if(($int==false)||($int=="Недопустимые символы")){
 			$model->error[]='Ошибка URL адресса';
@@ -143,7 +143,7 @@ class UserController implements IController {
 		$fc = FrontController::getInstance();
 		$model = new LoadModel();
 		$select = new SelectModel();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		$get=$fc->getParams();
 		$model->url=$get['name'];
 		$output  = $model->render('user_header.php');
@@ -192,7 +192,7 @@ class UserController implements IController {
 		$output .= $model->render('user_menu.php');
 		if(!empty($model->error)){
 			$select = new SelectModel();
-			$pars = new MickModel();
+			$pars = new VerificationModel();
 			$get=$fc->getParams();
 			$model->url = $get['name'];
 			$output .= $model->render('user_error.php');
@@ -265,9 +265,9 @@ class UserController implements IController {
 		unset($_SESSION['caph']);
 		$fc = FrontController::getInstance();
 		$get=$fc->getParams();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		$model = new LoadModel();
-		$model->url = $pars->valid_int($get["name"]);
+		$model->url = $pars->verifacationInt($get["name"]);
 		if($model->url === false){
 			$model->error[]='Ошибка URL адресса';
 		}
@@ -286,10 +286,10 @@ class UserController implements IController {
 	public function post_deleteAction(){
 		$fc = FrontController::getInstance();
 		$model = new LoadModel();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 			
 		$get=$fc->getParams();
-		$model->url = $pars->valid_int($get["name"]);
+		$model->url = $pars->verifacationInt($get["name"]);
 		
 		if($_POST['caph'] == $_SESSION['caph']){
 			
@@ -392,10 +392,10 @@ class UserController implements IController {
 		// var_dump($_POST);exit;
 		$fc = FrontController::getInstance();
 		$model = new LoadModel();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		$select = new SelectModel();
 		
-		$id_reg = $pars->valid_int($_POST['id_u']);
+		$id_reg = $pars->verifacationInt($_POST['id_u']);
 		if($id_reg != false){
 			$model->data = $select->get_information($id_reg);
 			$output .= $model->render('user_contacts.php');
@@ -407,22 +407,22 @@ class UserController implements IController {
 		$fc = FrontController::getInstance();
 	
 		$model = new LoadModel();
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		
-		$model->data['id_hoz']=$pars->valid_int($_POST["id_u"]);
-		$model->data['id_kv']=$pars->valid_int($_POST["id_k"]);
+		$model->data['id_hoz']=$pars->verifacationInt($_POST["id_u"]);
+		$model->data['id_kv']=$pars->verifacationInt($_POST["id_k"]);
 		$output .= $model->render('JQ/sent_to_kvar_hoz.php');
 		$fc->setBody($output);
 		
 	}
 	public function send_kvAction(){
 		
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		
 		preg_match ("#[0-9]{2}.[0-9]{2}\s[0-9]{2}:[0-9]{2}#" , $_POST["dataprosmotra"], $data);
-		$message=$pars->valid_string($_POST["textf"]);
-		$id_user=$pars->valid_int($_POST["vlastelin"]);
-		$id_sale=$pars->valid_int($_POST["kvartira"]);
+		$message=$pars->verifacationLogin($_POST["textf"]);
+		$id_user=$pars->verifacationInt($_POST["vlastelin"]);
+		$id_sale=$pars->verifacationInt($_POST["kvartira"]);
 		
 		$insert = new InsertModel();
 		$insert->insert_look($id_user, $id_sale, $message, $data[0]);
@@ -548,13 +548,13 @@ class UserController implements IController {
 		$fc->setBody($output);
 	}
 	public function sale_step_1Action(){
-		$pars = new MickModel();
+		$pars = new VerificationModel();
 		
 		unset($_SESSION['error']);
 		$arr = array();
 		
 		if(isset($_POST["metro"])&& !empty($_POST["metro"])){
-			$arr["metro"] = $pars->valid_string($_POST["metro"]);
+			$arr["metro"] = $pars->verifacationLogin($_POST["metro"]);
 			if($arr["metro"] === false){
 				$_SESSION['error'][]="не указано метро";
 			}
@@ -562,47 +562,47 @@ class UserController implements IController {
 			$arr["metro"] = "";
 		}
 		if(isset($_POST["lodjiyaS"])&& !empty($_POST["lodjiyaS"])){
-			$arr["lodjiyaS"] = $pars->valid_string($_POST["lodjiyaS"]);
+			$arr["lodjiyaS"] = $pars->verifacationLogin($_POST["lodjiyaS"]);
 			if($arr["lodjiyaS"] === false){
 				$_SESSION['error'][]="не указано наличие лоджии";
 			}
 		}else{
 			$arr["lodjiyaS"] = 0;
 		}
-		$arr["category"] = $pars->valid_int($_POST["category"]);
-		$arr["city"] = $pars->valid_string($_POST["city"]);
-		$arr["street"] = $pars->valid_string($_POST["street"]);
-		$arr["type"] = $pars->valid_int($_POST["type"]);
-		$arr["sobstvennik"] = $pars->valid_int($_POST["sobstvennik"]);
-		$arr["phone"] = $pars->valid_int($_POST["phone"]);
-		$arr["izolyaciya"] = $pars->valid_int($_POST["izolyaciya"]);
-		$arr["TYALET3AKPblT"] = $pars->valid_int($_POST["TYALET3AKPblT"]);
-		$arr["freesell"] = $pars->valid_int($_POST["freesell"]);
-		$arr["maloletoknet"] = $pars->valid_int($_POST["maloletoknet"]);
-		$arr["ka4estvo"] = $pars->valid_int($_POST["ka4estvo"]);
-		$arr["kydaokna"] = $pars->valid_int($_POST["kydaokna"]);
-		$arr["planirovka"] = $pars->valid_int($_POST["planirovka"]);
-		$arr["osnovanie"] = $pars->valid_int($_POST["osnovanie"]);
-		$arr["osnov_poluch"] = $pars->valid_string($_POST["osnov_poluch"]);
-		$arr["mortgage"] = $pars->valid_int($_POST["mortgage"]);//ипотека
-		$arr["sobstvennost"] = $pars->valid_int($_POST["sobstvennost"]);
-		$arr["balkon"] = $pars->valid_int($_POST["balkon"]);
-		$arr["lodj"] = $pars->valid_int($_POST["lodj"]);
-		$arr["number_house"] = $pars->valid_string($_POST["number_house"]);
-		$arr["kolKomnat"] = $pars->valid_string($_POST["kolKomnat"]);
-		$arr["price"] = $pars->valid_string($_POST["price"]);
-		$arr["dometro"] = $pars->valid_string($_POST["dometro"]);
-		$arr["docentra"] = $pars->valid_string($_POST["docentra"]);
-		$arr["obcshayaS"] = $pars->valid_string($_POST["obcshayaS"]);
-		$arr["jilayaS"] = $pars->valid_string($_POST["jilayaS"]);
-		$arr["kyxnyaS"] = $pars->valid_string($_POST["kyxnyaS"]);
-		$arr["koridorS"] = $pars->valid_string($_POST["koridorS"]);
-		$arr["sanyzelS"] = $pars->valid_string($_POST["sanyzelS"]);
-		$arr["visota"] = $pars->valid_string($_POST["visota"]);
-		$arr["etag"] = $pars->valid_int($_POST["etag"]);
-		$arr["etagnost"] = $pars->valid_int($_POST["etagnost"]);
-		$arr["year_structure"] = $pars->valid_string($_POST["year_structure"]);
-		$arr["text"] = $pars->valid_string($_POST["text"]);
+		$arr["category"] = $pars->verifacationInt($_POST["category"]);
+		$arr["city"] = $pars->verifacationLogin($_POST["city"]);
+		$arr["street"] = $pars->verifacationLogin($_POST["street"]);
+		$arr["type"] = $pars->verifacationInt($_POST["type"]);
+		$arr["sobstvennik"] = $pars->verifacationIntt($_POST["sobstvennik"]);
+		$arr["phone"] = $pars->verifacationInt($_POST["phone"]);
+		$arr["izolyaciya"] = $pars->verifacationInt($_POST["izolyaciya"]);
+		$arr["TYALET3AKPblT"] = $pars->verifacationInt($_POST["TYALET3AKPblT"]);
+		$arr["freesell"] = $pars->verifacationInt($_POST["freesell"]);
+		$arr["maloletoknet"] = $pars->verifacationIntt($_POST["maloletoknet"]);
+		$arr["ka4estvo"] = $pars->verifacationInt($_POST["ka4estvo"]);
+		$arr["kydaokna"] = $pars->verifacationInt($_POST["kydaokna"]);
+		$arr["planirovka"] = $pars->verifacationInt($_POST["planirovka"]);
+		$arr["osnovanie"] = $pars->verifacationInt($_POST["osnovanie"]);
+		$arr["osnov_poluch"] = $pars->verifacationLogin($_POST["osnov_poluch"]);
+		$arr["mortgage"] = $pars->verifacationInt($_POST["mortgage"]);//ипотека
+		$arr["sobstvennost"] = $pars->verifacationInt($_POST["sobstvennost"]);
+		$arr["balkon"] = $pars->verifacationInt($_POST["balkon"]);
+		$arr["lodj"] = $pars->verifacationInt($_POST["lodj"]);
+		$arr["number_house"] = $pars->verifacationLogin($_POST["number_house"]);
+		$arr["kolKomnat"] = $pars->verifacationLogin($_POST["kolKomnat"]);
+		$arr["price"] = $pars->verifacationLogin($_POST["price"]);
+		$arr["dometro"] = $pars->verifacationLogin($_POST["dometro"]);
+		$arr["docentra"] = $pars->verifacationLogin($_POST["docentra"]);
+		$arr["obcshayaS"] = $pars->verifacationLogin($_POST["obcshayaS"]);
+		$arr["jilayaS"] = $pars->verifacationLogin($_POST["jilayaS"]);
+		$arr["kyxnyaS"] = $pars->verifacationLogin($_POST["kyxnyaS"]);
+		$arr["koridorS"] = $pars->verifacationLogin($_POST["koridorS"]);
+		$arr["sanyzelS"] = $pars->verifacationLogin($_POST["sanyzelS"]);
+		$arr["visota"] = $pars->verifacationLogin($_POST["visota"]);
+		$arr["etag"] = $pars->verifacationInt($_POST["etag"]);
+		$arr["etagnost"] = $pars->verifacationInt($_POST["etagnost"]);
+		$arr["year_structure"] = $pars->verifacationLogin($_POST["year_structure"]);
+		$arr["text"] = $pars->verifacationLogin($_POST["text"]);
 		// Плодим ифы ошибок
 		
 		if(($arr["category"] === false) || (!isset($arr["category"]))){ $_SESSION['error'][]="не указана категория"; }

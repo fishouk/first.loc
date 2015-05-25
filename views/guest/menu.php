@@ -1,5 +1,6 @@
-<div class="header">
-	<div class="wrap">
-		<a href="/">Главная</a>
-	</div>
-</div>
+<div class="container">
+    <header>
+      <nav>
+        <a href="#">Главная</a>
+      </nav>
+    </header>
