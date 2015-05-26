@@ -19,6 +19,18 @@ class IndexController implements IController {
 		$output .= $model->render('guest/footer.php');
 		$fc->setBody($output);
 	}
+	public function changeLogAction(){
+		$model = new LoadModel();
+		$fc = FrontController::getInstance();
+		/* Инициализация модели */
+		$output = $model->render('guest/header.php');
+		$output .= $model->render('guest/menu.php');
+		$output .= $model->render('guest/body_open.php');
+		$output .= $model->render('guest/changeLog.php');
+		$output .= $model->render('guest/body_close.php');
+		$output .= $model->render('guest/footer.php');
+		$fc->setBody($output);
+	}
 	public function authAction(){
 		if(!isset($_GET["au"]) || !isset($_POST["but"])){
 			header('Location: '.DEFAULT_DIR.'/wtf');
