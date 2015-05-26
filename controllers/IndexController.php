@@ -39,11 +39,22 @@ class IndexController implements IController {
 		$model = new LoadModel();
 		$utils = new VerificationModel();
 		$fc = FrontController::getInstance();
-		if(empty($_POST["login"])){
+		$login = $_POST["login"];
+		$password = $_POST["password"];
+		if(empty($login)){
 			$model->error[] .= "Введите логин.";
 		}
-		if(empty($_POST["password"])){
+		if(empty($password)){
 			$model->error[] .= "Введите пароль.";
+		}
+		$login = $utils->verifacationLogin($login);
+		$password = $utils->verifacationPassword($password);
+		if ($login&&$password) {
+			$_SESSION["user"]=true;
+			$_SESSION["user_info"]["login"]=$login;
+			$_SESSION["user_info"]["password"]=$password;
+			$_SESSION["user_info"]["fistName"]=$firstName;
+			$_SESSION["user_info"]["lastName"]=$lastName;
 		}
 		$output = $model->render('guest/header.php');
 		$output .= $model->render('guest/menu.php');
