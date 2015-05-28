@@ -31,12 +31,11 @@ class  VerificationModel{
 	public function verifacationPassword($password){
 		$password = trim($password);
 		$password = strip_tags($password);
-		if(strlen($password)<8){
-				$error = "Ваш пароль должен быть не менее 8 символов";
-		}else{
-			return $password;
-		}
-			return $error;
+		if(is_string($password)){
+				return $password;
+			}else{
+				return false;
+			}
 	}
 	public function verifacationEmail($email){
 		$email = trim($email);

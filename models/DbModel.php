@@ -6,7 +6,7 @@ class DbModel{
 	const HOST = 'localhost';
 	const USER = 'root';
 	const PASS = '';
-	const DB = 'uport_gssr';
+	const DB = 'first.loc';
 	
 	protected $connect;
 	
@@ -17,7 +17,7 @@ class DbModel{
 			$this->connect = @mysql_connect('localhost','root','') or die('Ошибка соединения с MySQL');
 		}
 		if(!@mysql_select_db(self::DB,$this->connect)){
-			@mysql_select_db('uport_gssr', $this->connect) or die('Ошибка соединения с базой данных.');
+			@mysql_select_db('first.loc', $this->connect) or die('Ошибка соединения с базой данных.');
 		}
 		@mysql_query("set names 'utf8'");
 	}

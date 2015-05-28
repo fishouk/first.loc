@@ -30,7 +30,7 @@ class FrontController {
 						$values[] = $splits[$i];
 					}
 				}
-			$this->_params = array_combine($keys, $values);
+			$this->_params = @array_combine($keys, $values);
 		}
 	}
 	public function route() {

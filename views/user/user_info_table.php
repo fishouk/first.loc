@@ -33,11 +33,11 @@
 	  				<td class="text-center">Иванов</td>
 	  			</tr>
 	  			<tr>
-	  				<td class="text-center"><?$_SESSION["user_info"]["id"]?></td>
-	  				<td class="text-center"><?$_SESSION["user_info"]["login"]?></td>
-	  				<td class="text-center"><?$_SESSION["user_info"]["email"]?></td>
-	  				<td class="text-center"><?$_SESSION["user_info"]["fistName"]?></td>
-	  				<td class="text-center"><?$_SESSION["user_info"]["lastName"]?></td>
+	  				<td class="text-center"><?=$_SESSION["user_info"]["id"]?></td>
+	  				<td class="text-center"><?=$_SESSION["user_info"]["login"]?></td>
+	  				<td class="text-center"><?=$_SESSION["user_info"]["email"]?></td>
+	  				<td class="text-center"><?=$_SESSION["user_info"]["fistName"]?></td>
+	  				<td class="text-center"><?=$_SESSION["user_info"]["lastName"]?></td>
 	  			</tr>  			
 	  		</tbody>
 		</table>	
