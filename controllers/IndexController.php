@@ -51,8 +51,9 @@ class IndexController implements IController {
 		$password = $utils->verifacationPassword($password);
 		if ($login&&$password) {
 			$_SESSION["user"]=true;
+			$_SESSION["user_info"]["id"]=$login;
 			$_SESSION["user_info"]["login"]=$login;
-			$_SESSION["user_info"]["password"]=$password;
+			$_SESSION["user_info"]["email"]=$email;
 			$_SESSION["user_info"]["fistName"]=$firstName;
 			$_SESSION["user_info"]["lastName"]=$lastName;
 		}

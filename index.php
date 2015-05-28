@@ -7,9 +7,9 @@ define('DIR', $_SERVER['DOCUMENT_ROOT']);
 date_default_timezone_set('Europe/Moscow');
 /* Пути по-умолчанию для поиска файлов */
 set_include_path(get_include_path()
-     .PATH_SEPARATOR.DIR.'/controllers'
-     .PATH_SEPARATOR.DIR.'/models'
-     .PATH_SEPARATOR.DIR.'/views');
+				.PATH_SEPARATOR.DIR.'/controllers'
+     			.PATH_SEPARATOR.DIR.'/models'
+     			.PATH_SEPARATOR.DIR.'/views');
 
 
 /* Автозагрузчик классов */

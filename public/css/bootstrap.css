@@ -6597,7 +6597,7 @@ body{
   margin-bottom: 10px;
 }
 .containerMargin{
-  margin-top: 50px;
+  padding-top: 50px;
   margin-bottom: 60px;
 }
 .btn-label {
@@ -6622,7 +6622,7 @@ body{
   margin: 20px 0 10px 0;
 }
 .footer{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: 60px;
@@ -6662,3 +6662,8 @@ body{
         .editsList a:hover{
           color: tomato;
         }
+
+/************ USER STYLES **************/
+.row .btn{
+  margin: 0 7px;
+}
