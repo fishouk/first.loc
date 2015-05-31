@@ -52,14 +52,14 @@ class FrontController {
 				if(isset($_SESSION['user'])&&!empty($_SESSION['user'])){
 					header('Location:'.DEFAULT_DIR.'/user/index');
 				}else{
-					header('Location:'.DEFAULT_DIR.'/index/index');
+					header('Location: /missingPage');
 				}
 			}
 		} else {
 			if(isset($_SESSION['user'])&&!empty($_SESSION['user'])){
 				header('Location:'.DEFAULT_DIR.'/user/index');
 			}else{
-				header('Location:'.DEFAULT_DIR.'/index/index');
+				header('Location: /missingPage');
 			}
 		}
 	}

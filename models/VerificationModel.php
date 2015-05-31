@@ -37,6 +37,16 @@ class  VerificationModel{
 				return false;
 			}
 	}
+	public function verifacationRegPassword($password){
+		$password = trim($password);
+		$password = strip_tags($password);
+		if(is_string($password)>3){
+				return $password;
+			}else{
+				echo "Слишком простой!";
+				return false;
+			}
+	}
 	public function verifacationEmail($email){
 		$email = trim($email);
 		$email = strip_tags($email);

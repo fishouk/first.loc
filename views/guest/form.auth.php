@@ -20,6 +20,7 @@
             </div>
 
             <div class="panel-footer clearfix">
+                <a class="btn btn-labeled btn-info pull-left" href="index/reg">Регистрация</a>
                 <input class="btn btn-labeled btn-success pull-right" type="submit" name="but" value="Авторизация" />
               </div>
           </form>
